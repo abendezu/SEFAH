@@ -30,4 +30,10 @@ public class sqlBancos {
         String sql = "select * from bancos";
         return sql;
     }
+    
+    public String getBancosbyFilter(){
+        String sql = "select * from bancos where codigoPais = ? and nombreBanco like ?";
+        return sql;
+    }
+    
 }

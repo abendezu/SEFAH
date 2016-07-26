@@ -21,8 +21,7 @@ public class Banco {
         this.nombreBanco = nombreBanco;
         this.codigoPais = codigoPais;
         this.estado = estado;
-    }
-    
+    }    
     
     public int getCodigoBanco() {
         return codigoBanco;
@@ -54,8 +53,5 @@ public class Banco {
 
     public void setEstado(String estado) {
         this.estado = estado;
-    }
-    
-    
-    
+    }            
 }

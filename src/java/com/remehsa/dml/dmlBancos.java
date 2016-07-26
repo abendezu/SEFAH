@@ -8,7 +8,6 @@ package com.remehsa.dml;
 import com.remehsa.db.dbConn;
 import com.remehsa.model.Banco;
 import com.remehsa.queries.sqlBancos;
-import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -61,7 +60,6 @@ public class dmlBancos {
             while(rs.next()){
                 Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),parseInt(rs.getString(3)),rs.getString(4));
                 lb.add(b);
-                System.out.println("entro "+b.getNombreBanco());
             }
             
             rs.close();
@@ -75,5 +73,33 @@ public class dmlBancos {
         return lb;
     }
     
+    public static List<Banco> getfilteredBancos(String codigoBanco, String nombreBanco){
+        
+        List<Banco> lb = new LinkedList<>();
+        
+        try {
+            PreparedStatement ps;
+            sqlBancos sqlbancos = new sqlBancos();
+            Connection con = dbConn.getConnected();
+            
+            ps = con.prepareStatement(sqlbancos.getBancosbyFilter());
+            ps.setString(1, codigoBanco);
+            ps.setString(2, nombreBanco);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),parseInt(rs.getString(3)),rs.getString(4));
+                lb.add(b);
+            }
+            
+            rs.close();
+            ps.close();
+            con.close();
+            
+        } catch (NamingException | SQLException ex) {
+            Logger.getLogger(dmlBancos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+                
+        return lb;
+    }
     
 }
