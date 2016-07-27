@@ -6,6 +6,7 @@
 package com.remehsa.servlet;
 
 import com.remehsa.dml.dmlBancos;
+import com.remehsa.dml.dmlPaises;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -35,6 +36,7 @@ public class Bancos extends HttpServlet {
             throws ServletException, IOException {
         try{
         request.setAttribute("allBancos", dmlBancos.getallBancos());
+        request.setAttribute("allPaises", dmlPaises.getallPaises());        
         RequestDispatcher rd = request.getRequestDispatcher("/JSP/Bancos.jsp");
         rd.forward(request, response);}
         catch (Exception ex){

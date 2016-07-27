@@ -27,7 +27,7 @@ public class sqlBancos {
     }
     
     public String getallBancos(){
-        String sql = "select * from bancos";
+        String sql = "select codigoBanco,nombreBanco,acronimoPais,bancos.estado from bancos,paises where bancos.codigoPais = paises.codigoPais";
         return sql;
     }
     

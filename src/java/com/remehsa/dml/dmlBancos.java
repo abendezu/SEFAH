@@ -58,7 +58,7 @@ public class dmlBancos {
             ps = con.prepareStatement(sqlbancos.getallBancos());
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),parseInt(rs.getString(3)),rs.getString(4));
+                Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4));
                 lb.add(b);
             }
             
@@ -87,7 +87,7 @@ public class dmlBancos {
             ps.setString(2, nombreBanco);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),parseInt(rs.getString(3)),rs.getString(4));
+                Banco b = new Banco(parseInt(rs.getString(1)),rs.getString(2),rs.getString(3),rs.getString(4));
                 lb.add(b);
             }
             

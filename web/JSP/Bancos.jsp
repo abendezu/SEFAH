@@ -15,21 +15,40 @@
     </head>
     <body>
         
-        <jsp:include page="../HTML/nuevoBanco.html"></jsp:include>
 
+        <h1>Bancos</h1>
+        <div style="width: 900px; margin-left: auto; margin-right: auto">
+            <form action="JSP/managerNewBanco.jsp" method="post">
+                Nombre de Banco:<br>
+                <input type="text" name="nombreBanco" style="width: 200px">
+                País: 
+
+                <select name="codigoPais">
+                        <option value="0"><-Seleccione-></option>                
+                        <c:forEach items="${allPaises}" var="p">
+                        <option value="${p.codigoPais}">${p.nombrePais}</option>
+                        </c:forEach>
+                </select><br>
+                
+                
+                <input type="submit" value="Submit">
+            </form>           
+        </div>
+        
+        
         <div style="width: 1200px; margin-left: auto; margin-right: auto;">
             <table cellpadding="10">
                 <tr>
                     <th>Codigo Banco</th>
                     <th>Nombre Banco</th>
-                    <th>Codigo Pais</th>
+                    <th>Pais</th>
                     <th>Estado</th>
                 </tr>
                 <c:forEach items="${allBancos}" var="b">
                     <tr>
                         <td>${b.codigoBanco}</td>
                         <td>${b.nombreBanco}</td>
-                        <td>${b.codigoPais}</td>
+                        <td>${b.acronimoPais}</td>
                         <td>${b.estado}</td>
                         <td>
                             <a href="edit?id=${b.codigoBanco}">Edit</a>
