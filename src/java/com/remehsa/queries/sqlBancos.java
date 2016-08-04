@@ -32,7 +32,7 @@ public class sqlBancos {
     }
     
     public String getBancosbyFilter(){
-        String sql = "select * from bancos where codigoPais = ? and nombreBanco like ?";
+        String sql = "select * from bancos where codigoPais like nvl(?,'%') and nombreBanco like nvl(?,'%')";        
         return sql;
     }
     

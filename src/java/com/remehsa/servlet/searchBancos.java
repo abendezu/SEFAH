@@ -8,7 +8,6 @@ package com.remehsa.servlet;
 import com.remehsa.dml.dmlBancos;
 import com.remehsa.dml.dmlPaises;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,8 +19,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author abendezu
  */
-@WebServlet(name = "Bancos", urlPatterns = {"/Bancos"})
-public class Bancos extends HttpServlet {
+@WebServlet(name = "searchBancos", urlPatterns = {"/searchBancos"})
+public class searchBancos extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,11 +33,7 @@ public class Bancos extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try{    
-        
-        String accion = request.getParameter("buttonAction");
-        System.out.println("Este es el valor que tienen esta variable "+ accion);
-            
+        try{                                   
         request.setAttribute("allBancos", dmlBancos.getallBancos());
         request.setAttribute("allPaises", dmlPaises.getallPaises());        
         RequestDispatcher rd = request.getRequestDispatcher("/JSP/Bancos.jsp");

@@ -12,13 +12,25 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Bancos</title>
+
+      <script type = "text/javascript"  src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		
+      <script type = "text/javascript" language = "javascript">
+            $(document).ready(function() {
+                var list = ["List A","List B","List C","List D","List E"];
+                $.each(list, function( index, value ) {
+                    //alert( index + ": " + value );
+                });
+            });      
+       </script>
+        
     </head>
     <body>
         
 
         <h1>Bancos</h1>
         <div style="width: 900px; margin-left: auto; margin-right: auto">
-            <form action="JSP/managerNewBanco.jsp" method="post">
+            <form action="/remehsa_we/Bancos" method="post">
                 Nombre de Banco:<br>
                 <input type="text" name="nombreBanco" style="width: 200px">
                 País: 
@@ -31,7 +43,8 @@
                 </select><br>
                 
                 
-                <input type="submit" value="Submit">
+                <input type="submit" value="Agregar" name="buttonAction">
+                <input type="submit" value="Buscar" name="buttonAction">
             </form>           
         </div>
         
