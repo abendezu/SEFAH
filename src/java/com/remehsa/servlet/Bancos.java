@@ -7,8 +7,8 @@ package com.remehsa.servlet;
 
 import com.remehsa.dml.dmlBancos;
 import com.remehsa.dml.dmlPaises;
+import com.remehsa.model.Banco;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -36,15 +36,51 @@ public class Bancos extends HttpServlet {
             throws ServletException, IOException {
         try{    
         
-        String accion = request.getParameter("buttonAction");
-        System.out.println("Este es el valor que tienen esta variable "+ accion);
-            
-        request.setAttribute("allBancos", dmlBancos.getallBancos());
-        request.setAttribute("allPaises", dmlPaises.getallPaises());        
-        RequestDispatcher rd = request.getRequestDispatcher("/JSP/Bancos.jsp");
-        rd.forward(request, response);
+            String nombreBanco = request.getParameter("nombreBanco");
+            String codigoPais = request.getParameter("codigoPais");
+            String accion = request.getParameter("buttonAction");
+            if (accion == null) accion = "";
+            String rows = request.getParameter("rows");
+            if (rows == null) rows = "1";
+            String maxrows = request.getParameter("maxrows");
+            if (maxrows == null) maxrows = "10";
+
+            System.out.println("Este es el valor que tienen esta variable "+ accion);
+        
+            if (accion.equalsIgnoreCase("Agregar")){
+                                
+                Banco b = new Banco(0,nombreBanco,(java.lang.Integer.parseInt(codigoPais)),"A");
+
+                dmlBancos dmlbancos = new dmlBancos();
+                dmlbancos.newBanco(b);
+
+                request.setAttribute("allBancos", dmlBancos.getallBancos());
+                request.setAttribute("allPaises", dmlPaises.getallPaises());        
+
+                //response.sendRedirect("/remehsa_we/Bancos");
+
+            } else if (accion.equalsIgnoreCase("Buscar")){
+                
+                System.out.println("Este es el valor de las variables codigoPais:"+codigoPais + " nombreBanco:"+ nombreBanco);
+                
+                request.setAttribute("allBancos", dmlBancos.getfilteredBancos(codigoPais, nombreBanco));
+                request.setAttribute("allPaises", dmlPaises.getallPaises());        
+                
+            } else {
+
+                request.setAttribute("allBancos", dmlBancos.getallBancos());
+                request.setAttribute("allPaises", dmlPaises.getallPaises());        
+
+            }
+
+            request.setAttribute("buttonAntvalue", "visible");
+            request.setAttribute("buttonSigvalue", "visible");                
+            RequestDispatcher rd = request.getRequestDispatcher("/JSP/Bancos.jsp");
+            rd.forward(request, response);
+        
+        
         } catch (Exception ex){
-            System.out.println("ex = " + ex.getMessage());
+            System.out.println("Entro al error ex = " + ex.getMessage());
         }
     }
 

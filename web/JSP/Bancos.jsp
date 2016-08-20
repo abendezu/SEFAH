@@ -16,13 +16,11 @@
       <script type = "text/javascript"  src = "http://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 		
       <script type = "text/javascript" language = "javascript">
-            $(document).ready(function() {
-                var list = ["List A","List B","List C","List D","List E"];
-                $.each(list, function( index, value ) {
-                    //alert( index + ": " + value );
-                });
-            });      
-       </script>
+        $( "form" ).submit(function() {          
+          $("#rows").val(("#rows").val()+("#maxrows").val());
+          alert($("#rows").val());
+        });
+      </script>
         
     </head>
     <body>
@@ -36,7 +34,7 @@
                 País: 
 
                 <select name="codigoPais">
-                        <option value="0"><-Seleccione-></option>                
+                        <option value=""><-Seleccione-></option>                
                         <c:forEach items="${allPaises}" var="p">
                         <option value="${p.codigoPais}">${p.nombrePais}</option>
                         </c:forEach>
@@ -45,6 +43,10 @@
                 
                 <input type="submit" value="Agregar" name="buttonAction">
                 <input type="submit" value="Buscar" name="buttonAction">
+                <input type="submit" value="<<anteriores" name="buttonAnt" style="visibility: ${buttonAntvalue}" >
+                <input type="submit" value="siguientes>>" name="buttonSig" style="visibility: ${buttonSigvalue}" >
+                <input type="hidden" id="rows" name="rows" value="" />
+                <input type="hidden" id="maxrows" name="maxrows" value="" />
             </form>           
         </div>
         
